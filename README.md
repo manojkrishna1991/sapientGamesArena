@@ -1,2 +1,0 @@
-# sapientGamesArena
-Created with CodeSandbox
