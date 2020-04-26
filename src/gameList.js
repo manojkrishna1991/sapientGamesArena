@@ -1,42 +1,89 @@
 import React from "react";
-import { Image, List } from "semantic-ui-react";
+import {
+  List,
+  Card,
+  Icon,
+  Image,
+  Grid,
+  Dimmer,
+  Loader
+} from "semantic-ui-react";
 import axios from "axios";
 class GameList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { listOfGames: [] };
-  }
-  componentDidMount() {
-    axios
-      .get("http://starlord.hackerearth.com/gamesext")
-      .then(function(response) {
-        // handle success
-        this.setState({ listOfGames: response.data });
-        console.log(response);
-      })
-      .catch(function(error) {
-        // handle error
-        console.log("fsdfdsf");
-        console.log(error);
-      });
   }
   render() {
     return (
-      <List horizontal>
-        {this.state.listOfGames.map(game => (
-          <List.Item>
-            <Image
-              avatar
-              src="https://react.semantic-ui.com/images/avatar/small/tom.jpg"
-            />
-            <List.Content>
-              <List.Header>Tom</List.Header>
-              Top Contributor
-            </List.Content>
-          </List.Item>
-        ))}
-      </List>
+      <div className="box-content">
+        <Grid relaxed="very" columns={4}>
+          {this.props.results.map((game, index) => {
+            return (
+              <>
+                <Grid.Column>
+                  <Card key={index} style={{ margin: 30 }}>
+                    <Image src="/white-image.png" wrapped ui={false} />
+                    <Card.Content>
+                      <Card.Header>{game.title}</Card.Header>
+                      <Card.Meta>
+                        <span className="date">
+                          Release Year: {game.release_year}
+                        </span>
+                      </Card.Meta>
+                    </Card.Content>
+                    <Card.Content extra>
+                      <Icon name="send" />
+                      <a>
+                        {" "}
+                        <span className="blue-text">Game Genre :</span>{" "}
+                        {game.genre}
+                      </a>
+                    </Card.Content>
+                    <Card.Content extra>
+                      <Icon name="microsoft" />
+                      <a>
+                        {" "}
+                        <span className="blue-text">Game Platform :</span>
+                        {game.platform}
+                      </a>
+                    </Card.Content>
+                    <Card.Content extra>
+                      <a>
+                        <Icon name="user" />
+                        <span className="blue-text">Editor Choice </span>:
+                        {game.editors_choice}
+                      </a>
+                    </Card.Content>
+                    <Card.Content extra>
+                      <a>
+                        <Icon name="star" />
+                        <span className="blue-text">Score:</span>
+                        {game.score}
+                      </a>
+                    </Card.Content>
+
+                    {game.editors_choice && (
+                      <Card.Content extra>
+                        <a>
+                          <Icon name="thumbs up" />
+                          <span className="blue-text">Editors Choice</span>
+                        </a>
+                      </Card.Content>
+                    )}
+                  </Card>
+                </Grid.Column>
+              </>
+            );
+          })}
+        </Grid>
+      </div>
     );
   }
 }
+const isEven = index => {
+  if (index % 4 == 0) {
+    return true;
+  }
+  return false;
+};
 export default GameList;
