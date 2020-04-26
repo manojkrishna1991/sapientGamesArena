@@ -28,7 +28,7 @@ const LoadingIndicator = props => {
           top: 100
         }}
       >
-        <Loader type="FiveDots" color="#2BAD60" height="100" width="100" />
+        <Loader type="ThreeDots" color="#2BAD60" height="100" width="100" />
       </div>
     )
   );

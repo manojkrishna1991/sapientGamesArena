@@ -78,7 +78,7 @@ class App extends React.Component {
             </Menu.Item>
             <Menu.Item
               style={{ padding: "1.5em " }}
-              position="center"
+              position="right"
               as="a"
               active
             >
